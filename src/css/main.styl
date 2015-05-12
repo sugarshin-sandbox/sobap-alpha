@@ -2,3 +2,54 @@
 @import "nib"
 
 normalize-css()
+
+@import "import/_function"
+@import "import/_variable"
+@import "import/_base"
+@import "import/_partial"
+@import "import/_g-header"
+@import "import/_g-footer"
+@import "import/_social"
+@import "import/_shop"
+@import "import/_shop-detail"
+@import "import/_shop-detail-body"
+
+.google-map
+  height 38vh
+  background #fff
+.google-map-canvas
+  height 100%
+
+.main
+  background clr_bk
+  box-shadow 0 0 4px 0 clr_bk
+  position relative
+  z-index 1
+  height 100%
+  @media screen and (max-width: 567px)
+    padding-bottom 50px
+
+.shops
+  max-width 1024px
+  min-height 100%
+  padding 1.25% .68%
+  margin 0 auto
+  box-sizing border-box
+  transition .3s top ease-out
+  display flex
+  flex-flow row wrap
+  justify-content space-between
+  align-content flex-start
+  align-items flex-start
+
+.not-found
+  padding-top 50px
+  h2, p
+    color clr_wh
+    margin 0
+  h2
+    text-align center
+    font-size 32px
+  p
+    text-align center
+    margin 2em 0

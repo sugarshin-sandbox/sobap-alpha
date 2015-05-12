@@ -1,18 +1,22 @@
 import EventEmitter from 'eventemitter3';
 
 import dispatcher from '../dispatcher/dispatcher';
-import {SEARCH_SHOP} from '../constants/constants';
+import {UPDATE_SHOP_DETAIL} from '../constants/constants';
 
-class ShopStore extends EventEmitter {
+// todo
+import defaultShopDetail from './default-shop-detail'
+
+class ShopDetailStore extends EventEmitter {
 
   constructor() {
     super();
-    this._shops = [];
+    this._shopDetail = defaultShopDetail;
+
     dispatcher.register(this._handler.bind(this));
   }
 
-  getShops() {
-    return this._shops;
+  getShop() {
+    return this._shopDetail;
   }
 
   addChangeListener(callback) {
@@ -27,14 +31,14 @@ class ShopStore extends EventEmitter {
     this.emit('change');
   }
 
-  _fetchShop(shops) {
-    this._shops = shops;
+  _fetchShop(shop) {
+    this._shopDetail = shop;
   }
 
   _handler(action) {
     switch (action.actionType) {
-      case SEARCH_SHOP:
-        this._fetchShop(action.data.results.shop);
+      case UPDATE_SHOP_DETAIL:
+        this._fetchShop(action.data.results.shop[0]);
         this._emitChange();
         break;
 
@@ -44,4 +48,4 @@ class ShopStore extends EventEmitter {
 
 }
 
-export default new ShopStore
+export default new ShopDetailStore

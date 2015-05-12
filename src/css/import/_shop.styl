@@ -1,0 +1,64 @@
+@charset "utf-8"
+
+.shop
+  _starWidth = 10%
+  background clr_wh
+  width 32.5%
+  margin-bottom 1.25%
+  box-sizing border-box
+  padding .68%
+  color clr_bk
+  position relative
+  @media screen and (max-width: 767px)
+    width 47.5%
+    margin 1.25%
+    padding: 1.25%;
+
+  @media screen and (max-width: 481px)
+    width 98.75%
+    padding 2.5%
+
+  .shop-name
+    margin-top 0
+    border-bottom 1px solid clr_lgry
+    line-height 2
+    padding-right _starWidth
+    a
+      color inherit
+      text-decoration none
+      &:hover
+        text-decoration underline
+      @media screen and (max-width: 481px)
+        display block
+
+  .shop-g-static-map
+    margin 16px 0
+    overflow hidden
+    a
+      display block
+      position relative
+      &:hover
+        .octicon-link-external
+          color clr_gry
+    img
+      width 100%
+      height auto
+      vertical-align top
+      transition transform .1s ease-out
+    .octicon-link-external
+      position absolute
+      top 4%
+      right 2.25%
+      color lighten(clr_bk, 70%)
+
+  .shop-link-external
+    margin 16px 0
+    a
+      margin 0 4% 4% 0
+  .shop-memo-container
+    border-top 1px solid clr_lgry
+  .star-button
+    width _starWidth
+    position absolute
+    top 0
+    right 2%

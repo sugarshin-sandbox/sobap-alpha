@@ -1,5 +1,8 @@
 import React from 'react';
+import { run, HashLocation } from 'react-router';
 
-import App from './components/app'
+import routes from './config/routes';
 
-React.render(<App />, document.body);
+run(routes, HashLocation, (Root) => {
+  React.render(<Root />, document.getElementById('container'));
+});

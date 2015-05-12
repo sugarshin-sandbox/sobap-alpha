@@ -3,8 +3,7 @@
 D =
   PATH: '/'
   SRC: 'src'
-  DEST: 'dest'
-  BUILD: 'build'
+  DEST: 'public'
 
 module.exports =
   D: D
@@ -12,6 +11,8 @@ module.exports =
   serve:
     notify: false
     startPath: D.PATH
+    host: '127.0.0.1'
+    open: 'external'
     server:
       baseDir: './'
       index: "#{D.DEST}#{D.PATH}/"
@@ -21,49 +22,46 @@ module.exports =
   scripts:
     browserifyOpts:
       entries: ["./#{D.SRC}/js/main.jsx"]
-      extensions: ['.jsx']
-      transform: ['babelify']
+      extensions: ['.jsx', '.cjsx', '.coffee']
+      transform: ['babelify', 'coffee-reactify', 'react-jade']
     dest: "#{D.DEST}#{D.PATH}/js"
 
   uglify:
     src: "./#{D.DEST}#{D.PATH}/js/main.js"
-    dest: "#{D.BUILD}#{D.PATH}/js"
+    dest: "#{D.DEST}#{D.PATH}/js"
 
   jade:
     src: [
-      "#{D.SRC}/**/*.jade"
-      "!#{D.SRC}/**/_**/*.jade"
-      "!#{D.SRC}/**/_*.jade"
+      "#{D.SRC}/html/index.jade"
     ]
     dest: "#{D.DEST}#{D.PATH}"
 
   stylus:
     src: [
-      "#{D.SRC}/**/*.styl"
-      "!#{D.SRC}/**/_**/*.styl"
-      "!#{D.SRC}/**/_*.styl"
+      "#{D.SRC}/css/main.styl"
     ]
     dest: "#{D.DEST}#{D.PATH}/css"
 
   minifyCss:
-    src: "./#{D.DEST}#{D.PATH}/css/main.css"
-    dest: "#{D.BUILD}#{D.PATH}/css"
+    src: [
+      "#{D.DEST}#{D.PATH}/css/main.css"
+      "#{D.DEST}#{D.PATH}/css/octicons.css"
+    ]
+    dest: "#{D.DEST}#{D.PATH}/css"
 
-  clean: ["#{D.BUILD}#{D.PATH}"]
+  clean: ["#{D.DEST}#{D.PATH}"]
 
   replace:
     src: "#{D.DEST}#{D.PATH}/index.html"
-    dest: "#{D.BUILD}#{D.PATH}"
+    dest: "#{D.DEST}#{D.PATH}"
     replacements: [
+      ['<link rel="stylesheet" href="css/octicons.css">', '']
       ['main.js?v', "main.min.js?v#{Date.now()}"]
       ['main.css?v', "main.min.css?v#{Date.now()}"]
     ]
 
   copy:
     src: [
-      "#{D.DEST}/**"
-      "!#{D.DEST}/css/**"
-      "!#{D.DEST}/js/**"
-      "!#{D.DEST}/img/**"
+      './node_modules/octicons/octicons/octicons.{css,eot,svg,ttf,woff}'
     ]
-    dest: D.BUILD
+    dest: "#{D.DEST}/css"

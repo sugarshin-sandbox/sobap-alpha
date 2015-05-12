@@ -1,5 +1,7 @@
 import keyMirror from 'keymirror';
 
 export default keyMirror({
-  FETCH_SHOP: null
+  SEARCH_SHOP: null,
+  FETCH_STARRED_SHOP: null,
+  UPDATE_SHOP_DETAIL: null
 });
